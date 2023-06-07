@@ -5,9 +5,9 @@
 
 # Doesn't need a default case because we don't support other OSs
 # shellcheck disable=SC2249
-HOMEBREW_PROCESSOR="$(uname -m)"
+HOMEBREW_PROCESSOR='arm64'
 HOMEBREW_PHYSICAL_PROCESSOR="${HOMEBREW_PROCESSOR}"
-HOMEBREW_SYSTEM="$(uname -s)"
+HOMEBREW_SYSTEM='Darwin'
 case "${HOMEBREW_SYSTEM}" in
   Darwin) HOMEBREW_MACOS="1" ;;
   Linux) HOMEBREW_LINUX="1" ;;
