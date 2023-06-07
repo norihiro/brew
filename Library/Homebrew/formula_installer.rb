@@ -321,7 +321,7 @@ class FormulaInstaller
     invalid_arch_dependencies = []
     pinned_unsatisfied_deps = []
     recursive_deps.each do |dep|
-      if (tab = Tab.for_formula(dep.to_formula)) && tab.arch.present? && tab.arch.to_s != Hardware::CPU.arch.to_s
+      if (tab = Tab.for_formula(dep.to_formula)) && tab.arch.present? && tab.arch.to_s != :arm64.to_s
         invalid_arch_dependencies << "#{dep} was built for #{tab.arch}"
       end
 
@@ -334,7 +334,7 @@ class FormulaInstaller
 
     if invalid_arch_dependencies.present?
       raise CannotInstallFormulaError, <<~EOS
-        #{formula.full_name} dependencies not built for the #{Hardware::CPU.arch} CPU architecture:
+        #{formula.full_name} dependencies not built for the #{:arm64} CPU architecture:
           #{invalid_arch_dependencies.join("\n  ")}
       EOS
     end
@@ -1232,7 +1232,7 @@ on_request: installed_on_request?, options: options)
     tab.installed_on_request = installed_on_request?
     tab.time = Time.now.to_i
     tab.aliases = formula.aliases
-    tab.arch = Hardware::CPU.arch
+    tab.arch = :arm64
     tab.source["versions"]["stable"] = formula.stable.version&.to_s
     tab.source["versions"]["version_scheme"] = formula.version_scheme
     tab.source["path"] = formula.specified_path.to_s

@@ -125,7 +125,7 @@ class MacOSVersion < Version
 
     return Hardware.oldest_cpu(self) == :nehalem if Hardware::CPU.intel?
 
-    raise ArgumentError, "Unexpected architecture: #{Hardware::CPU.arch}. This only works with Intel architecture."
+    raise ArgumentError, "Unexpected architecture: #{:arm64}. This only works with Intel architecture."
   end
   # https://en.wikipedia.org/wiki/Nehalem_(microarchitecture)
   alias requires_sse4? requires_nehalem_cpu?

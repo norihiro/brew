@@ -40,7 +40,7 @@ describe Tab do
           "head"   => "HEAD-1111111",
         },
       },
-      "arch"                 => Hardware::CPU.arch,
+      "arch"                 => :arm64,
       "built_on"             => DevelopmentTools.build_system_info,
     )
   end

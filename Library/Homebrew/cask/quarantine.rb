@@ -25,7 +25,7 @@ module Cask
     private_class_method :xattr
 
     def self.swift_target_args
-      ["-target", "#{Hardware::CPU.arch}-apple-macosx#{MacOS.version}"]
+      ["-target", "#{"arm64"}-apple-macosx#{MacOS.version}"]
     end
     private_class_method :swift_target_args
 

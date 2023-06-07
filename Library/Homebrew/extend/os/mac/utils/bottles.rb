@@ -7,7 +7,7 @@ module Utils
       module MacOSOverride
         sig { params(tag: T.nilable(T.any(Symbol, Tag))).returns(Tag) }
         def tag(tag = nil)
-          return Tag.new(system: MacOS.version.to_sym, arch: Hardware::CPU.arch) if tag.nil?
+          return Tag.new(system: MacOS.version.to_sym, arch: :arm64) if tag.nil?
 
           super
         end

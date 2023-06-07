@@ -1679,19 +1679,19 @@ class Formula
   def deuniversalize_machos(*targets)
     targets = nil if targets.blank?
     targets ||= any_installed_keg.mach_o_files.select do |file|
-      file.arch == :universal && file.archs.include?(Hardware::CPU.arch)
+      file.arch == :universal && file.archs.include?("arm64")
     end
 
-    targets.each { |t| extract_macho_slice_from(Pathname.new(t), Hardware::CPU.arch) }
+    targets.each { |t| extract_macho_slice_from(Pathname.new(t), "arm64") }
   end
 
   # @private
   sig { params(file: Pathname, arch: T.nilable(Symbol)).void }
-  def extract_macho_slice_from(file, arch = Hardware::CPU.arch)
+  def extract_macho_slice_from(file, arch = "arm64")
     odebug "Extracting #{arch} slice from #{file}"
     file.ensure_writable do
       macho = MachO::FatFile.new(file)
-      native_slice = macho.extract(Hardware::CPU.arch)
+      native_slice = macho.extract("arm64")
       native_slice.write file
       MachO.codesign! file if Hardware::CPU.arm?
     rescue MachO::MachOBinaryError

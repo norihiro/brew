@@ -84,7 +84,7 @@ module Homebrew
       end
 
       def check_supported_architecture
-        return if Hardware::CPU.arch == :x86_64
+        return if :arm64 == :x86_64
 
         <<~EOS
           Your CPU architecture (#{Hardware::CPU.arch}) is not supported. We only support

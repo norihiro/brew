@@ -332,12 +332,12 @@ module FormulaCellarChecks
     mismatches = {}
     keg.binary_executable_or_library_files.each do |file|
       farch = file.arch
-      mismatches[file] = farch if farch != Hardware::CPU.arch
+      mismatches[file] = farch if farch != :arm64
     end
     return if mismatches.empty?
 
     compatible_universal_binaries, mismatches = mismatches.partition do |file, arch|
-      arch == :universal && file.archs.include?(Hardware::CPU.arch)
+      arch == :universal && file.archs.include?(:arm64)
     end.map(&:to_h) # To prevent transformation into nested arrays
 
     universal_binaries_expected = if formula.tap.present? && formula.tap.core_tap?

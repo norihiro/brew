@@ -38,7 +38,7 @@ class Tab
       "stdlib"                  => stdlib,
       "aliases"                 => formula.aliases,
       "runtime_dependencies"    => Tab.runtime_deps_hash(formula, runtime_deps),
-      "arch"                    => Hardware::CPU.arch,
+      "arch"                    => :arm64,
       "source"                  => {
         "path"         => formula.specified_path.to_s,
         "tap"          => formula.tap&.name,
