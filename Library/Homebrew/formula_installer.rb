@@ -48,7 +48,7 @@ class FormulaInstaller
     show_header: false,
     build_bottle: false,
     skip_post_install: false,
-    force_bottle: false,
+    force_bottle: true,
     bottle_arch: nil,
     ignore_deps: false,
     only_deps: false,
@@ -670,7 +670,7 @@ on_request: installed_on_request?, options: options)
     df = dep.to_formula
     fi = FormulaInstaller.new(
       df,
-      force_bottle:               false,
+      force_bottle:               true,
       # When fetching we don't need to recurse the dependency tree as it's already
       # been done for us in `compute_dependencies` and there's no requirement to
       # fetch in a particular order.
@@ -728,7 +728,7 @@ on_request: installed_on_request?, options: options)
       link_keg:                   keg_had_linked_keg ? keg_was_linked : nil,
       installed_as_dependency:    true,
       installed_on_request:       df.any_version_installed? && tab.present? && tab.installed_on_request,
-      force_bottle:               false,
+      force_bottle:               true,
       include_test_formulae:      @include_test_formulae,
       build_from_source_formulae: @build_from_source_formulae,
       keep_tmp:                   keep_tmp?,
